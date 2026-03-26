@@ -155,17 +155,17 @@ function HeroBrowserMockup({ style }) {
   ];
   return (
     <div
-      className="overflow-hidden rounded-xl border border-surface-border bg-[#0c0c0d] shadow-card"
+      className="overflow-hidden rounded-xl border border-surface-border bg-mock-outer shadow-card"
       role="img"
       aria-label="Mock browser window showing tab titles with aging indicators"
     >
-      <div className="flex items-center gap-3 border-b border-surface-border bg-[#141416] px-3 py-2">
+      <div className="flex items-center gap-3 border-b border-surface-border bg-mock-bar px-3 py-2">
         <TrafficLights />
-        <div className="flex-1 rounded-md border border-surface-border bg-black/30 px-3 py-1 text-center text-[11px] text-ink-faint">
+        <div className="flex-1 rounded-md border border-surface-border bg-mock-url px-3 py-1 text-center text-[11px] text-ink-faint">
           oldtabber.local
         </div>
       </div>
-      <div className="flex items-end gap-0.5 border-b border-surface-border bg-[#101012] px-2 pt-2">
+      <div className="flex items-end gap-0.5 border-b border-surface-border bg-mock-well px-2 pt-2">
         {tabs.map((t) => (
           <TabChip key={t.title} active={t.active} faded={t.faded} title={t.title}>
             <span
@@ -178,7 +178,7 @@ function HeroBrowserMockup({ style }) {
           </TabChip>
         ))}
       </div>
-      <div className="h-32 bg-gradient-to-b from-[#121214] to-surface sm:h-40">
+      <div className="h-32 bg-gradient-to-b from-mock-content to-surface sm:h-40">
         <div className="p-4 text-[11px] leading-relaxed text-ink-faint sm:text-xs">
           <p className="text-ink-muted">Page content</p>
           <p className="mt-2 max-w-md">
@@ -195,7 +195,7 @@ function SectionTitle({ eyebrow, title, description }) {
   return (
     <div className="mx-auto max-w-2xl text-center">
       {eyebrow ? (
-        <p className="text-sm font-medium tracking-wide text-accent">{eyebrow}</p>
+        <p className="text-sm font-medium tracking-wide text-warmth">{eyebrow}</p>
       ) : null}
       <h2 className="mt-2 text-2xl font-semibold tracking-tight text-cream sm:text-3xl">
         {title}
@@ -211,7 +211,7 @@ function PrimaryCta({ href, children }) {
   return (
     <a
       href={href}
-      className="inline-flex items-center justify-center rounded-lg bg-accent px-5 py-2.5 text-sm font-semibold text-surface transition hover:bg-accent-hover focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent"
+      className="inline-flex items-center justify-center rounded-lg bg-accent px-5 py-2.5 text-sm font-semibold text-black transition hover:bg-accent-hover focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent"
     >
       {children}
     </a>
@@ -233,7 +233,7 @@ function SettingsPanelMock({ activeModeId }) {
   const mode = SITE.modes.find((m) => m.id === activeModeId) ?? SITE.modes[0];
   return (
     <div
-      className="rounded-xl border border-surface-border bg-[#141416] p-4 shadow-soft sm:p-5"
+      className="rounded-xl border border-surface-border bg-mock-bar p-4 shadow-soft sm:p-5"
       aria-label="Extension settings preview (illustrative)"
     >
       <div className="flex items-center justify-between gap-3 border-b border-surface-border pb-4">
@@ -247,7 +247,7 @@ function SettingsPanelMock({ activeModeId }) {
             className="relative inline-flex h-5 w-9 items-center rounded-full bg-accent"
             aria-hidden="true"
           >
-            <span className="ml-4 block h-4 w-4 rounded-full bg-surface" />
+            <span className="ml-4 block h-4 w-4 rounded-full bg-brand-black" />
           </span>
         </div>
       </div>
@@ -349,7 +349,7 @@ export default function LandingPage() {
         <section className="border-b border-surface-border px-4 py-16 sm:px-6 sm:py-24 lg:py-28">
           <div className="mx-auto grid max-w-6xl gap-12 lg:grid-cols-2 lg:items-center lg:gap-16">
             <div>
-              <p className="text-sm font-medium text-accent">{SITE.headlines.kicker}</p>
+              <p className="text-sm font-medium text-warmth">{SITE.headlines.kicker}</p>
               <div className="mt-6 flex items-start gap-4">
                 <LogoMark className="hidden h-14 w-14 sm:block" />
                 <div>

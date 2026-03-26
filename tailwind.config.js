@@ -4,22 +4,48 @@ export default {
   theme: {
     extend: {
       colors: {
+        /** Core palette: slate teal, pale mint, black */
+        brand: {
+          slate: "#546869",
+          mint: "#D1ECE8",
+          black: "#000000",
+        },
         surface: {
-          DEFAULT: "#111113",
-          raised: "#18181b",
-          border: "#27272a",
+          DEFAULT: "#000000",
+          raised: "#0a1010",
+          deep: "#050808",
+          /** Muted teal derived from #546869 */
+          border: "#2f3f3f",
         },
         ink: {
-          DEFAULT: "#fafaf9",
-          muted: "#a1a1aa",
-          faint: "#71717a",
+          DEFAULT: "#D1ECE8",
+          muted: "#8da9a5",
+          faint: "#5c706e",
         },
+        /** Headlines / high-emphasis (same family as mint) */
+        cream: "#D1ECE8",
+        /** Monochromatic accent — brighter mint-teal for actions */
         accent: {
-          DEFAULT: "#d97706",
-          soft: "rgba(217, 119, 6, 0.12)",
-          hover: "#ea580c",
+          DEFAULT: "#7ecfc0",
+          hover: "#96ddd0",
+          soft: "rgba(126, 207, 192, 0.14)",
         },
-        cream: "#f5f5f0",
+        /**
+         * Split-complement warmth (teal ↔ muted coral-bisque).
+         * Use sparingly: eyebrow, optional hover hints.
+         */
+        warmth: {
+          DEFAULT: "#c4a99a",
+          muted: "#9a8579",
+        },
+        /** Browser mockup chrome — all in the same cool family */
+        mock: {
+          outer: "#050808",
+          bar: "#0c1313",
+          well: "#080d0d",
+          content: "#0a1111",
+          url: "rgba(84, 104, 105, 0.25)",
+        },
       },
       fontFamily: {
         sans: [
@@ -32,8 +58,8 @@ export default {
         ],
       },
       boxShadow: {
-        card: "0 1px 0 rgba(255,255,255,0.04), 0 12px 40px rgba(0,0,0,0.35)",
-        soft: "0 2px 8px rgba(0,0,0,0.2)",
+        card: "0 1px 0 rgba(209, 236, 232, 0.05), 0 16px 48px rgba(0, 0, 0, 0.55)",
+        soft: "0 2px 12px rgba(0, 0, 0, 0.35)",
       },
     },
   },
