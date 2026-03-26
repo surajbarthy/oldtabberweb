@@ -1,106 +1,11 @@
 import { useId, useState } from "react";
-
-/**
- * Edit marketing copy and URLs here.
- * Logo: place PNG at public/oldtabber-logo.png (see index.html favicon).
- * Optional real screenshots: swap paths in OPTIONAL_SCREENSHOTS (used as commented examples).
- */
-export const SITE = {
-  name: "OldTabber",
-  tagline: "Chrome extension",
-  chromeStoreUrl: "https://chrome.google.com/webstore/detail/oldtabber",
-  githubUrl: "https://github.com/yourusername/oldtabber",
-  privacyUrl: "/privacy",
-  /** Optional: drop hero or feature PNGs into public/ and set paths, e.g. "/screenshots/hero-tabs.png" */
-  screenshots: {
-    hero: null, // e.g. "/screenshots/hero-tabs.png"
-    demo: null, // e.g. "/screenshots/styles-demo.png"
-  },
-  headlines: {
-    hero: "See which tabs you’ve forgotten.",
-    kicker: "Most tabs don’t get closed. They get forgotten.",
-    subhead:
-      "OldTabber quietly shows which tabs you left behind, so you can revisit what matters and close what doesn’t.",
-    finalCta: "Ready to see what you’ve been ignoring?",
-    finalSub:
-      "Install once. Everything stays on your device—no account, no server.",
-  },
-  benefits: [
-    {
-      title: "Less clutter, no forced cleanup",
-      body: "Nothing closes for you. You decide—just with better information.",
-    },
-    {
-      title: "See what matters at a glance",
-      body: "Aging lives in the tab title, where you already look.",
-    },
-    {
-      title: "Make “later” visible",
-      body: "Turn vague intentions into something you can actually see.",
-    },
-    {
-      title: "Stay focused, keep context",
-      body: "Leave tabs open without pretending you’ll remember all of them.",
-    },
-  ],
-  steps: [
-    {
-      title: "Open tabs like normal",
-      body: "Browse the way you already do.",
-    },
-    {
-      title: "Quiet local tracking",
-      body: "OldTabber notes inactivity in your browser—nothing leaves your machine.",
-    },
-    {
-      title: "Aging you can act on",
-      body: "Indicators help you revisit, act, or close with confidence.",
-    },
-  ],
-  modes: [
-    {
-      id: "balanced",
-      label: "Balanced",
-      description: "Default pacing for everyday browsing.",
-      thresholds: ["30 minutes", "2 hours", "1 day", "3 days"],
-    },
-    {
-      id: "focus",
-      label: "Focus",
-      description: "Tabs age faster when you want a tighter loop.",
-      thresholds: ["10 minutes", "30 minutes", "2 hours", "8 hours"],
-    },
-    {
-      id: "chill",
-      label: "Chill",
-      description: "Slower decay when you keep long-lived reference tabs.",
-      thresholds: ["1 hour", "6 hours", "2 days", "7 days"],
-    },
-  ],
-  states: {
-    minimal: [
-      { symbol: "·", label: "Fresh", hint: "Recently active" },
-      { symbol: "○", label: "Waiting", hint: "Left behind" },
-      { symbol: "●", label: "Urgent", hint: "Needs attention" },
-      { symbol: "✖", label: "Dead", hint: "Likely forgotten" },
-    ],
-    expressive: [
-      { symbol: "🥚", label: "Fresh", hint: "Recently active" },
-      { symbol: "⏳", label: "Waiting", hint: "Left behind" },
-      { symbol: "🔥", label: "Urgent", hint: "Needs attention" },
-      { symbol: "☠️", label: "Dead", hint: "Likely forgotten" },
-    ],
-  },
-  privacy: {
-    title: "Designed for privacy",
-    body: "OldTabber is local-first. No server. No account. No syncing required. Tab activity stays in your browser and is used only to show aging indicators.",
-  },
-};
+import { Link } from "react-router-dom";
+import { SITE } from "./siteConfig.js";
 
 function LogoMark({ className = "h-10 w-10" }) {
   return (
     <img
-      src="/oldtabber-logo.png"
+      src={`${import.meta.env.BASE_URL}oldtabber-logo.png`}
       alt=""
       width={160}
       height={160}
@@ -320,7 +225,10 @@ export default function LandingPage() {
 
       <header className="sticky top-0 z-50 border-b border-surface-border/80 bg-surface/90 backdrop-blur-md">
         <div className="mx-auto flex max-w-6xl items-center justify-between gap-4 px-4 py-3 sm:px-6">
-          <a href="#" className="flex items-center gap-2.5 rounded-md focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent">
+          <Link
+            to="/"
+            className="flex items-center gap-2.5 rounded-md focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent"
+          >
             <LogoMark className="h-9 w-9" />
             <div className="leading-tight">
               <span className="block text-sm font-semibold text-cream">
@@ -328,7 +236,7 @@ export default function LandingPage() {
               </span>
               <span className="block text-xs text-ink-faint">{SITE.tagline}</span>
             </div>
-          </a>
+          </Link>
           <nav className="hidden items-center gap-6 md:flex" aria-label="Page">
             {nav.map((item) => (
               <a
@@ -607,6 +515,14 @@ export default function LandingPage() {
             <p className="mt-4 text-base leading-relaxed text-ink-muted">
               {SITE.privacy.body}
             </p>
+            <p className="mt-6">
+              <Link
+                to={SITE.privacyUrl}
+                className="text-sm font-medium text-accent underline decoration-accent/30 underline-offset-4 transition hover:decoration-accent"
+              >
+                Full privacy policy
+              </Link>
+            </p>
           </div>
         </section>
 
@@ -642,9 +558,9 @@ export default function LandingPage() {
             <a className="hover:text-cream" href={SITE.githubUrl}>
               GitHub
             </a>
-            <a className="hover:text-cream" href={SITE.privacyUrl}>
+            <Link className="hover:text-cream" to={SITE.privacyUrl}>
               Privacy
-            </a>
+            </Link>
           </nav>
           <p className="text-xs text-ink-faint">
             © {new Date().getFullYear()} {SITE.name}
