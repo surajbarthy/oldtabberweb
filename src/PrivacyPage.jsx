@@ -1,5 +1,6 @@
 import { useEffect } from "react";
 import { Link } from "react-router-dom";
+import LogoMark from "./LogoMark.jsx";
 import { SITE } from "./siteConfig.js";
 
 /** Edit contact and policy date here */
@@ -7,19 +8,6 @@ const POLICY = {
   lastUpdated: "March 25, 2026",
   contactEmail: "hello@oldtabber.com",
 };
-
-function LogoMark({ className = "h-9 w-9" }) {
-  return (
-    <img
-      src={`${import.meta.env.BASE_URL}oldtabber-logo.png`}
-      alt=""
-      width={160}
-      height={160}
-      className={`shrink-0 rounded-lg object-contain ${className}`}
-      decoding="async"
-    />
-  );
-}
 
 export default function PrivacyPage() {
   useEffect(() => {

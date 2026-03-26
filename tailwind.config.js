@@ -4,26 +4,23 @@ export default {
   theme: {
     extend: {
       colors: {
-        /** Core: slate teal + pale mint (no pure black UI) */
         brand: {
           slate: "#546869",
           mint: "#D1ECE8",
-          /** Near-black with teal bias — text on accent buttons */
-          void: "#0c1213",
+          void: "#0a0a0a",
         },
+        /** Neutral grey surfaces (page + panels) */
         surface: {
-          /** Page background — deep harmonious teal-charcoal */
-          DEFAULT: "#161f21",
-          raised: "#1e2c2e",
-          deep: "#121a1c",
-          sunken: "#0f1618",
-          /** Muted line; sits between deep base and #546869 */
-          border: "#33494a",
+          DEFAULT: "#26262b",
+          raised: "#303036",
+          deep: "#1a1a1e",
+          sunken: "#161618",
+          border: "#3f3f46",
         },
         ink: {
           DEFAULT: "#D1ECE8",
-          muted: "#8da9a5",
-          faint: "#5c706e",
+          muted: "#a1a1aa",
+          faint: "#71717a",
         },
         cream: "#D1ECE8",
         accent: {
@@ -31,16 +28,21 @@ export default {
           hover: "#96ddd0",
           soft: "rgba(126, 207, 192, 0.14)",
         },
+        cta: {
+          DEFAULT: "#2dd4bf",
+          hover: "#5eead4",
+          glow: "rgba(45, 212, 191, 0.22)",
+        },
         warmth: {
           DEFAULT: "#c4a99a",
           muted: "#9a8579",
         },
         mock: {
-          outer: "#121a1c",
-          bar: "#1a2527",
-          well: "#141d1f",
-          content: "#161f21",
-          url: "rgba(84, 104, 105, 0.28)",
+          outer: "#1a1a1e",
+          bar: "#242429",
+          well: "#1f1f23",
+          content: "#26262b",
+          url: "rgba(63, 63, 70, 0.55)",
         },
       },
       fontFamily: {
@@ -55,8 +57,8 @@ export default {
       },
       boxShadow: {
         card:
-          "0 1px 0 rgba(209, 236, 232, 0.06), 0 16px 48px rgba(8, 14, 15, 0.45)",
-        soft: "0 2px 12px rgba(8, 14, 15, 0.28)",
+          "0 1px 0 rgba(255, 255, 255, 0.04), 0 16px 48px rgba(0, 0, 0, 0.4)",
+        soft: "0 2px 12px rgba(0, 0, 0, 0.25)",
       },
     },
   },

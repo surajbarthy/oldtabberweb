@@ -7,6 +7,8 @@ export const SITE = {
   tagline: "Chrome extension",
   chromeStoreUrl: "https://chrome.google.com/webstore/detail/oldtabber",
   githubUrl: "https://github.com/yourusername/oldtabber",
+  /** Shown on /v2 footer; update to your real address */
+  contactEmail: "hello@oldtabber.com",
   privacyUrl: "/privacy",
   defaultDocumentTitle: "OldTabber — See which tabs you’ve forgotten",
   screenshots: {
