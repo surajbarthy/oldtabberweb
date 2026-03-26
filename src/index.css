@@ -16,7 +16,7 @@
 
 @layer components {
   .skip-link {
-    @apply absolute left-4 top-4 z-[100] -translate-y-[200vh] rounded-md bg-cream px-4 py-2 text-sm font-medium text-black shadow-soft;
+    @apply absolute left-4 top-4 z-[100] -translate-y-[200vh] rounded-md bg-cream px-4 py-2 text-sm font-medium text-brand-void shadow-soft;
   }
   .skip-link:focus {
     @apply translate-y-0 outline outline-2 outline-offset-2 outline-accent;

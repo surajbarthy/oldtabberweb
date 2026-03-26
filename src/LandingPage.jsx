@@ -40,7 +40,7 @@ function TabChip({ active, faded, children, title }) {
         "flex min-w-0 max-w-[140px] items-center gap-1.5 rounded-t-md border border-b-0 px-2 py-1.5 text-[11px] sm:max-w-[180px] sm:text-xs",
         active
           ? "border-surface-border bg-surface-raised text-ink"
-          : "border-transparent bg-black/25 text-ink-muted",
+          : "border-transparent bg-surface-deep/60 text-ink-muted",
         faded ? "opacity-60" : "",
       ].join(" ")}
       title={title}
@@ -116,7 +116,7 @@ function PrimaryCta({ href, children }) {
   return (
     <a
       href={href}
-      className="inline-flex items-center justify-center rounded-lg bg-accent px-5 py-2.5 text-sm font-semibold text-black transition hover:bg-accent-hover focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent"
+      className="inline-flex items-center justify-center rounded-lg bg-accent px-5 py-2.5 text-sm font-semibold text-brand-void transition hover:bg-accent-hover focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent"
     >
       {children}
     </a>
@@ -152,7 +152,7 @@ function SettingsPanelMock({ activeModeId }) {
             className="relative inline-flex h-5 w-9 items-center rounded-full bg-accent"
             aria-hidden="true"
           >
-            <span className="ml-4 block h-4 w-4 rounded-full bg-brand-black" />
+            <span className="ml-4 block h-4 w-4 rounded-full bg-brand-void" />
           </span>
         </div>
       </div>
@@ -191,7 +191,7 @@ function SettingsPanelMock({ activeModeId }) {
           {mode.thresholds.map((t, i) => (
             <li
               key={t}
-              className="flex items-center justify-between rounded-md border border-surface-border bg-black/20 px-2 py-1.5"
+              className="flex items-center justify-between rounded-md border border-surface-border bg-surface-deep/50 px-2 py-1.5"
             >
               <span className="text-ink-faint">Level {i + 1}</span>
               <span className="text-cream">{t}</span>
@@ -489,7 +489,7 @@ export default function LandingPage() {
                       {m.thresholds.map((t) => (
                         <li
                           key={t}
-                          className="rounded-md border border-surface-border bg-black/20 px-2 py-0.5 text-xs text-ink-muted"
+                          className="rounded-md border border-surface-border bg-surface-deep/50 px-2 py-0.5 text-xs text-ink-muted"
                         >
                           {t}
                         </li>
