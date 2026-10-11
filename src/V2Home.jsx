@@ -128,26 +128,12 @@ const V2 = {
   },
 };
 
-function PrimaryCta({ href, children }) {
+function Section({ title, children }) {
   return (
-    <a
-      href={href}
-      className="inline-flex items-center justify-center rounded-full bg-cta px-7 py-3 text-base font-semibold text-brand-void shadow-[0_0_0_1px_rgba(45,212,191,0.35)] transition hover:bg-cta-hover focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-cta"
-    >
+    <section>
+      <hr />
+      <h2>{title}</h2>
       {children}
-    </a>
-  );
-}
-
-function Section({ title, children, className = "" }) {
-  return (
-    <section
-      className={`mt-10 border-t border-surface-border pt-10 sm:mt-12 sm:pt-12 ${className}`}
-    >
-      <h2 className="text-lg font-semibold tracking-tight text-cream">{title}</h2>
-      <div className="mt-4 space-y-4 text-sm leading-relaxed text-ink-muted sm:text-[15px] sm:leading-relaxed">
-        {children}
-      </div>
     </section>
   );
 }
@@ -160,7 +146,7 @@ function publicAsset(path) {
 }
 
 /**
- * Renders <img> when `V2.images[key]` is set; otherwise dashed placeholder with specs + examples.
+ * Renders <img> when `V2.images[key]` is set; otherwise a dashed placeholder with specs + examples.
  */
 function ImagePlaceholder({ imageKey }) {
   const guide = V2.imagePlaceholders[imageKey];
@@ -171,57 +157,24 @@ function ImagePlaceholder({ imageKey }) {
 
   if (resolved) {
     return (
-      <figure className="overflow-hidden rounded-xl border border-surface-border bg-surface-raised shadow-soft">
-        <img
-          src={resolved}
-          alt={alt}
-          className="w-full object-cover"
-          loading="lazy"
-          decoding="async"
-        />
-        <figcaption className="border-t border-surface-border px-3 py-2 text-center text-xs text-ink-faint">
-          {label}
-        </figcaption>
+      <figure className="figure">
+        <img src={resolved} alt={alt} loading="lazy" decoding="async" />
+        <figcaption>{label}</figcaption>
       </figure>
     );
   }
 
   return (
-    <figure
-      className="overflow-hidden rounded-xl border border-dashed border-surface-border bg-surface-deep/25"
-      aria-label={`Placeholder: ${label}`}
-    >
-      <div className="flex flex-col gap-3 px-5 py-8 sm:px-6 sm:py-10">
-        <div className="text-center">
-          <p className="text-xs font-semibold uppercase tracking-wide text-ink-faint">
-            Image placeholder
-          </p>
-          <p className="mt-1 text-sm font-medium text-ink-muted">{label}</p>
-          <p className="mx-auto mt-2 max-w-lg text-xs leading-relaxed text-ink-faint">
-            <span className="text-ink-muted">Size:</span> {guide.dimensions}
-          </p>
-          <p className="mt-2 font-mono text-[10px] text-ink-faint">
-            Set{" "}
-            <code className="rounded bg-surface-raised px-1.5 py-0.5 text-ink-muted">
-              V2.images.{imageKey}
-            </code>{" "}
-            → suggested{" "}
-            <code className="rounded bg-surface-raised px-1.5 py-0.5 text-ink-muted">
-              {guide.suggestedFile}
-            </code>
-          </p>
-        </div>
-        <div className="border-t border-surface-border pt-4">
-          <p className="text-center text-xs font-semibold uppercase tracking-wide text-ink-faint">
-            Example ideas
-          </p>
-          <ul className="mx-auto mt-3 max-w-lg list-disc space-y-2 pl-5 text-left text-xs leading-relaxed text-ink-muted">
-            {guide.examples.map((line) => (
-              <li key={line}>{line}</li>
-            ))}
-          </ul>
-        </div>
-      </div>
+    <figure className="placeholder" aria-label={`Placeholder: ${label}`}>
+      <strong>Image placeholder: {label}</strong>
+      <br />
+      Size: {guide.dimensions}. Set <code>V2.images.{imageKey}</code>, suggested{" "}
+      <code>{guide.suggestedFile}</code>.
+      <ul>
+        {guide.examples.map((line) => (
+          <li key={line}>{line}</li>
+        ))}
+      </ul>
     </figure>
   );
 }
@@ -238,100 +191,66 @@ export default function V2Home() {
   }, []);
 
   return (
-    <div className="min-h-screen bg-surface text-ink">
+    <>
       <a href="#v2-main" className="skip-link">
         Skip to content
       </a>
 
-      <header className="border-b border-surface-border/80 bg-surface/90 backdrop-blur-md">
-        <div className="mx-auto max-w-3xl px-4 py-5 sm:px-6">
-          <Link
-            to="/"
-            className="inline-flex items-center gap-2.5 rounded-md focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-cta"
-          >
-            <LogoMark className="h-9 w-9" />
-            <span className="text-base font-semibold text-cream">{SITE.name}</span>
+      <header className="site-header">
+        <div className="wrap">
+          <Link to="/" className="brand">
+            <LogoMark />
+            {SITE.name}
           </Link>
-          <p className="mt-3 max-w-2xl text-sm leading-relaxed text-ink-muted sm:text-[15px]">
+          <p className="small muted" style={{ margin: 0, flexBasis: "100%" }}>
             {V2.headerLine}
           </p>
         </div>
       </header>
 
-      <main
-        id="v2-main"
-        className="mx-auto max-w-3xl px-4 pb-16 pt-8 sm:px-6 sm:pb-20 sm:pt-10"
-      >
-        {/* Hero — OneTab-style two-line headline */}
-        <h1 className="text-[1.5rem] font-semibold leading-snug tracking-tight text-cream sm:text-4xl sm:leading-tight">
-          <span className="block">{V2.heroLine1}</span>
-          <span className="block">{V2.heroLine2}</span>
+      <main id="v2-main" className="wrap">
+        <h1>
+          {V2.heroLine1}
+          <br />
+          {V2.heroLine2}
         </h1>
-        <p className="mt-4 max-w-2xl text-base leading-relaxed text-ink-muted sm:text-lg">
-          {V2.heroSub}
+        <p className="lead">{V2.heroSub}</p>
+        <p className="small muted">{V2.browsers}</p>
+
+        <ImagePlaceholder imageKey="heroDiagram" />
+
+        <table className="compare">
+          <tbody>
+            <tr>
+              <td>{V2.beforeMetric}</td>
+              <td>{V2.afterMetric}</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <ImagePlaceholder imageKey="tabComparison" />
+
+        <p className="stat">
+          <strong>{V2.statValue}</strong> {V2.statLabel}.
         </p>
-        <p className="mt-3 text-sm leading-relaxed text-ink-faint">{V2.browsers}</p>
 
-        <div className="mt-8">
-          <ImagePlaceholder imageKey="heroDiagram" />
+        <div className="preview-head">
+          <span id={toggleId} className="small muted">
+            Preview — indicator style:
+          </span>
+          <StyleToggle id={toggleId} value={style} onChange={setStyle} />
         </div>
+        <HeroBrowserMockup style={style} compact />
 
-        {/* Before / after — like OneTab’s MB comparison */}
-        <div className="mt-8 grid gap-3 sm:grid-cols-2 sm:gap-4">
-          <div className="rounded-xl border border-surface-border bg-surface-raised p-4 sm:p-5">
-            <p className="text-sm font-medium leading-snug text-ink-muted sm:text-base">
-              {V2.beforeMetric}
-            </p>
-          </div>
-          <div className="rounded-xl border border-cta/35 bg-cta/10 p-4 sm:p-5">
-            <p className="text-sm font-medium leading-snug text-ink sm:text-base">
-              {V2.afterMetric}
-            </p>
-          </div>
-        </div>
-
-        <div className="mt-8">
-          <ImagePlaceholder imageKey="tabComparison" />
-        </div>
-
-        {/* Stat — parallel to “95% memory reduction” */}
-        <div className="mt-10 flex flex-col items-center text-center">
-          <p className="text-5xl font-semibold tabular-nums text-cta sm:text-6xl">
-            {V2.statValue}
-          </p>
-          <p className="mt-2 max-w-sm text-sm leading-snug text-ink-muted sm:text-base">
-            {V2.statLabel}
-          </p>
-        </div>
-
-        {/* Preview mock */}
-        <div className="mt-10">
-          <p id={toggleId} className="sr-only">
-            Indicator style
-          </p>
-          <div className="mb-3 flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
-            <span className="text-xs font-medium uppercase tracking-wide text-ink-faint">
-              Preview
-            </span>
-            <StyleToggle id={toggleId} value={style} onChange={setStyle} />
-          </div>
-          <HeroBrowserMockup
-            style={style === "minimal" ? "minimal" : "expressive"}
-            compact
-          />
-        </div>
-
-        {/* Primary CTA */}
-        <div className="mt-12 flex flex-col items-center text-center">
-          <PrimaryCta href={SITE.chromeStoreUrl}>Add OldTabber to Chrome</PrimaryCta>
-          <p className="mt-3 text-sm text-ink-faint">{V2.noSignup}</p>
-          <Link
-            to="/"
-            className="mt-6 text-sm font-medium text-cta underline decoration-cta/35 underline-offset-4 transition hover:decoration-cta"
-          >
-            {V2.classicLink}
-          </Link>
-        </div>
+        <p>
+          <a className="button" href={SITE.chromeStoreUrl}>
+            Add OldTabber to Chrome
+          </a>
+        </p>
+        <p className="small muted">{V2.noSignup}</p>
+        <p>
+          <Link to="/">{V2.classicLink}</Link>
+        </p>
 
         <Section title={V2.howTitle}>
           <ImagePlaceholder imageKey="howItWorks" />
@@ -343,14 +262,7 @@ export default function V2Home() {
           <p>{V2.privacyP1}</p>
           <p>{V2.privacyP2}</p>
           <p>
-            {V2.privacyP3}{" "}
-            <Link
-              to={SITE.privacyUrl}
-              className="font-medium text-cta underline decoration-cta/35 underline-offset-4 hover:decoration-cta"
-            >
-              Privacy policy
-            </Link>
-            .
+            {V2.privacyP3} <Link to={SITE.privacyUrl}>Privacy policy</Link>.
           </p>
         </Section>
 
@@ -362,12 +274,12 @@ export default function V2Home() {
         <Section title={V2.featuresTitle}>
           <p>
             {V2.featuresP1Intro}{" "}
-            <span className="whitespace-nowrap font-semibold text-white">
+            <strong style={{ whiteSpace: "nowrap" }}>
               {SITE.states.minimal.map((s) => s.symbol).join(" ")}
-            </span>{" "}
+            </strong>{" "}
             and expressive indicators{" "}
             <span
-              className="whitespace-nowrap text-base"
+              style={{ whiteSpace: "nowrap" }}
               title="Expressive: fresh, waiting, urgent, forgotten"
             >
               {SITE.states.expressive.map((s) => s.symbol).join(" ")}
@@ -380,13 +292,7 @@ export default function V2Home() {
         <Section title={V2.installTitle}>
           <p>
             {V2.installP1}{" "}
-            <a
-              href={SITE.chromeStoreUrl}
-              className="font-medium text-cta underline decoration-cta/35 underline-offset-4 hover:decoration-cta"
-            >
-              Open the store listing
-            </a>
-            .
+            <a href={SITE.chromeStoreUrl}>Open the store listing</a>.
           </p>
           <ImagePlaceholder imageKey="installPin" />
           <p>{V2.installP2}</p>
@@ -399,51 +305,26 @@ export default function V2Home() {
         <Section title={V2.troubleshootTitle}>
           <p>{V2.troubleshootP1}</p>
           <p>
-            {V2.troubleshootP2}{" "}
-            <a
-              href={SITE.githubUrl}
-              className="font-medium text-cta underline decoration-cta/35 underline-offset-4 hover:decoration-cta"
-            >
-              GitHub
-            </a>
-            .
+            {V2.troubleshootP2} <a href={SITE.githubUrl}>GitHub</a>.
           </p>
         </Section>
       </main>
 
-      <footer className="border-t border-surface-border py-8">
-        <div className="mx-auto max-w-3xl space-y-4 px-4 text-sm text-ink-muted sm:px-6">
+      <footer className="site-footer">
+        <div className="wrap">
           <p>
-            <span className="text-ink-faint">{V2.contactLabel}</span>{" "}
-            <a
-              href={`mailto:${SITE.contactEmail}`}
-              className="text-cta underline decoration-cta/35 underline-offset-4 hover:decoration-cta"
-            >
-              {SITE.contactEmail}
-            </a>
+            {V2.contactLabel}{" "}
+            <a href={`mailto:${SITE.contactEmail}`}>{SITE.contactEmail}</a>
           </p>
           <p>
-            <span className="text-ink-faint">{V2.helpLabel}</span>{" "}
-            <a
-              href={SITE.githubUrl}
-              className="text-cta underline decoration-cta/35 underline-offset-4 hover:decoration-cta"
-            >
-              {SITE.githubUrl}
-            </a>
+            {V2.helpLabel} <a href={SITE.githubUrl}>{SITE.githubUrl}</a>
           </p>
-          <div className="flex flex-wrap items-center justify-between gap-3 border-t border-surface-border pt-4 text-xs text-ink-faint">
-            <span>© {new Date().getFullYear()} {SITE.name}</span>
-            <div className="flex flex-wrap gap-x-5 gap-y-1">
-              <Link className="text-cta hover:text-cta-hover" to={SITE.privacyUrl}>
-                Privacy
-              </Link>
-              <Link className="hover:text-cream" to="/">
-                Home
-              </Link>
-            </div>
-          </div>
+          <p>
+            © {new Date().getFullYear()} {SITE.name} ·{" "}
+            <Link to={SITE.privacyUrl}>Privacy</Link> · <Link to="/">Home</Link>
+          </p>
         </div>
       </footer>
-    </div>
+    </>
   );
 }
